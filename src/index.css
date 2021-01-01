@@ -1,0 +1,147 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+html {
+  background-color: rgba(116, 255, 116, 0.145);
+}
+
+/* /* .sidebar {
+  max-width: 240px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+} */
+
+/* div.MuiButtonBase-root  > div > a {
+  margin-left: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  
+
+} */
+
+div.MuiButtonBase-root {
+  padding: 0px;
+}
+
+/* .MuiListItemText-root{
+  margin-bottom: 0px !important;
+} */
+
+div.MuiButtonBase-root > a {
+  width: 100%;
+  height: 35px;
+  padding-top: 10px;
+}
+
+
+.navbarr {
+  background-color: #55A661;
+  height: 95px;
+  display: flex;
+  align-items: center;
+  -moz-box-shadow:    1px 0 8px 0 rebeccapurple;
+  -webkit-box-shadow: 1px 0 8px 0 rebeccapurple;
+  box-shadow:         1px 0 8px 0 rebeccapurple;
+
+}
+
+.menu-bars {
+  margin-left: 2rem;
+  font-size: 2rem;
+  background: none;
+  cursor: pointer;
+}
+
+.nav-menu {
+  background-color: #48594B;
+  width: 250px;
+  height: 85vh;
+  position: absolute;
+  z-index: 10;
+  top: 30;
+  left: -100%;
+  transition: 850ms;
+  color: #bffac8;
+  -moz-box-shadow:    1px 0 8px 0 #55A661;
+  -webkit-box-shadow: 1px 0 8px 0 #55A661;
+  box-shadow:         1px 0 8px 0 #55A661;
+}
+
+.nav-menu.active {
+  left: 0;
+  transition: 350ms;
+  position: absolute;
+  overflow-y: scroll;
+  scrollbar-color: rebeccapurple green;
+  scrollbar-width: thin;
+  z-index: 10;
+}
+
+/* these webkits are for stying scroller in chrome */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+/******************/
+
+.head-title {
+  padding: 2%;
+  text-align: center;
+  width: 100%;
+
+}
+
+.logo {
+  width: 60px;
+  align-self: flex-end;
+
+  
+}
+.head-title > h4:nth-child(2) {
+  font-size: 1.1rem;
+  font-family: 'Dancing Script', cursive;
+  margin-top: 0;
+  margin-bottom: 2px;
+
+}
+
+.logoutbutton{
+
+  font-size: 0.9rem;
+  font-family: 'Roboto';
+  color: whitesmoke;
+  margin-right: 30px;
+  cursor: pointer;
+}
+
+.Link {
+  text-decoration: none;
+  color: #bffac8;
+}
+
+.loginmain {
+  background-color: rgba(116, 255, 116, 0.145);
+  width: 100%;
+  height: 80vh
+  
+}
