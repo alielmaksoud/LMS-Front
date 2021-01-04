@@ -4,8 +4,10 @@ import items from './Components/Sidebar/SidebarData.js'
 import Navbar from './Components/Navbar/Navbar.js'
 import useVisible from './Service/useVisible'
 import Protection from './loginPages/Protection'
-import NewAdmin from './Pages/NewAdmin.js';
-import ManageAdmin from './Pages/ManageAdmin.js';
+import NewAdmin from './Pages/Admins/NewAdmin.js';
+import ManageAdmin from './Pages/Admins/ManageAdmin';
+import EditAdmin from './Pages/Admins/EditAdmin';
+
 
 import { 
   BrowserRouter as

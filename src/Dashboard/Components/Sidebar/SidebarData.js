@@ -3,8 +3,7 @@
  const items = [
   {
     name: 'Admins',
-    label: 'Admins',
-
+    label: 'Admin',
     items: [
       { name: 'Manage Admins', label: 'Manage Admins',path: '/admin/ManageAdmin' },
       { name: 'New Admin', label: 'New Admin', path: '/admin/NewAdmin' },
