@@ -6,6 +6,8 @@ import useVisible from './Service/useVisible'
 import Protection from './loginPages/Protection'
 import NewAdmin from './Pages/Admins/NewAdmin.js';
 import ManageAdmin from './Pages/Admins/ManageAdmin';
+import ManageStudents from './Pages/Students/ManageStudent';
+import NewStudent from './Pages/Students/NewStudent';
 import EditAdmin from './Pages/Admins/EditAdmin';
 
 
@@ -38,6 +40,12 @@ function Dashboard() {
         </Protection>
         <Protection path='/admin/ManageAdmin'>
             <ManageAdmin />
+        </Protection>
+        <Protection path='/admin/Managestudents'>
+            <ManageStudents />
+        </Protection>
+        <Protection path='/admin/Newstudent'>
+            <NewStudent />
         </Protection>
       </Switch>
     </Router>
