@@ -8,12 +8,16 @@ import NewAdmin from './Pages/Admins/NewAdmin.js';
 import ManageAdmin from './Pages/Admins/ManageAdmin';
 import ManageStudents from './Pages/Students/ManageStudent';
 import NewStudent from './Pages/Students/NewStudent';
-import EditAdmin from './Pages/Admins/EditAdmin';
+import ManageClasses from './Pages/classes-sections/ManageClass';
+import NewClass from './Pages/classes-sections/NewClass';
+import NotFound from './Pages/Not_Found/NotFound'
+
 
 
 import { 
   BrowserRouter as
    Router,
+  Route,
    Switch }
 from 'react-router-dom';
 
@@ -47,6 +51,15 @@ function Dashboard() {
         <Protection path='/admin/Newstudent'>
             <NewStudent />
         </Protection>
+        <Protection path='/admin/Newclass'>
+            <NewClass />
+        </Protection>
+        <Protection path='/admin/Manageclasses'>
+            <ManageClasses />
+        </Protection>
+        <Route>
+            <NotFound />
+        </Route>
       </Switch>
     </Router>
     </>

@@ -33,6 +33,7 @@ const useStyless = makeStyles((themee) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    height: '84vh'
   },
 
   formm: {
@@ -62,6 +63,9 @@ const useStyless = makeStyles((themee) => ({
       marginTop: '1%',
       'marginLeft': '15%',
     },
+    editclass : {
+      backgroundColor: 'rgba(116, 255, 116, 0.145)'
+    }
  
   },
 }));
@@ -69,7 +73,7 @@ const useStyless = makeStyles((themee) => ({
 
 
 function NewStudent() {
-  const { register , handleSubmit, errors, reset } = useForm();
+  const { register , handleSubmit, reset } = useForm();
   const cookie = CookieService.get('Bearer');
   const NewAdminclass = useStyless();
   const [display, setdisplay] = useState({display: 'None', color: 'red' });
@@ -121,14 +125,15 @@ function NewStudent() {
     };
     axios.post('http://localhost:8000/api/student', fd, headers)
    .then(res => {
+    
     setmessage(data.first_name + " has been added")
     setdisplay({display: 'inline', color: 'green' })
     reset();
    })
   .catch((error) => {
    if(error){
-     console.log(error);
-    setmessage("oops..")
+    console.log(error.response.data.message)
+    setmessage(error.response.data.message)
     setdisplay({display: 'inline', color: 'red' })
    }
   })
@@ -151,7 +156,7 @@ const handleChangeSection = (event) => {
  }
  else {
   return (
-    <div className='loginmain' >
+    <div  style={{backgroundColor: 'rgba(116, 255, 116, 0.145)'}} className={NewAdminclass.editclass} >
     <Container component="main" maxWidth="md">
       <div className={NewAdminclass.paperr}>
         <Typography component="h1" variant="h5">

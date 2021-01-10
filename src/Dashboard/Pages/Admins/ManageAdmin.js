@@ -40,7 +40,7 @@ function ManageAdmin() {
       setEditing(!Editing)
     }
  
-    useEffect( async () => {
+    useEffect( () => {
       setLoading(true)
       var config = {
         method: 'get',

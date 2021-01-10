@@ -69,7 +69,7 @@ const useStyless = makeStyles((themee) => ({
 
 
 function NewStudent(props) {
-  const { register , handleSubmit, errors, reset } = useForm();
+  const { register , handleSubmit} = useForm();
   const cookie = CookieService.get('Bearer');
   const NewAdminclass = useStyless();
   const [display, setdisplay] = useState({display: 'None', color: 'red' });
@@ -137,7 +137,7 @@ function NewStudent(props) {
    .catch((error) => {
     if(error){
       console.log(error);
-     setmessage("oops..")
+     setmessage(error.response.data.message)
      setdisplay({display: 'inline', color: 'red' })
     }
    })
@@ -170,7 +170,7 @@ const handleChangeClass = (event) => {
     <Container component="main" maxWidth="md">
       <div className={NewAdminclass.paperr}>
         <Typography component="h1" variant="h5">
-          New Student
+          Edit Student Profile
         </Typography>
         {<span style={display}>{message}</span>}
         <form onSubmit={handleSubmit((data) => Modify(data))} className={NewAdminclass.formm} >

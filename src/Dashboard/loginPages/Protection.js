@@ -43,9 +43,7 @@ const ProtectedRoute = ({ children, ...rest }) => {
     
   });
   
-  // if(Verified.length === 0){
-  //   return <Redirect to={"/"} />
-  // }else {
+
       return (
         <Route {...rest}
           render={({location}) => {

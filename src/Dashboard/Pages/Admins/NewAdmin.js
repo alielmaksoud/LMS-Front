@@ -31,11 +31,13 @@ const useStyless = makeStyles((themee) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+
   },
 
   formm: {
     width: '100%', // Fix IE 11 issue.
     marginTop: themee.spacing(1),
+  
   },
   submit: {
     margin: themee.spacing(1, 0, 0),
@@ -51,14 +53,17 @@ const useStyless = makeStyles((themee) => ({
       zIndex: themee.zIndex.drawer + 1,
       color: 'green',
     },
- 
+    editclass : {
+      backgroundColor: '#bffac8',
+      height: '100%'
+    }
   },
 }));
 
 
 
 function NewAdmin() {
-  const { register , handleSubmit, errors, reset } = useForm();
+  const { register , handleSubmit , reset } = useForm();
   const cookie = CookieService.get('Bearer');
   const NewAdminclass = useStyless();
   const [display, setdisplay] = useState({display: 'None', color: 'red' });
@@ -90,14 +95,14 @@ function NewAdmin() {
   .catch((error) => {
    if(error){
      console.log(error);
-    setmessage("oops..")
+    setmessage(error.response.data.message)
     setdisplay({display: 'inline', color: 'red' })
    }
   })
 }
   return (
-    <div className='loginmain' >
-    <Container component="main" maxWidth="md">
+    <div style={{backgroundColor: 'rgba(116, 255, 116, 0.145)'}} className={NewAdminclass.editclass} >
+    <Container  component="main" maxWidth="md">
       <div className={NewAdminclass.paperr}>
         <Typography component="h1" variant="h5">
           New Admin
