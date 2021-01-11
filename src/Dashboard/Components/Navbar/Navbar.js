@@ -37,8 +37,8 @@ function Navbar({CheckSidebar, forwardedRef}) {
     <IconContext.Provider value={{ color: '#B5DFBB' }}>
         <div className='navbarr'>
     
-          <div className='menu-bars' ref={forwardedRef}>
-            <FaIcons.FaBars onClick={CheckSidebar}  />
+          <div onClick={CheckSidebar} className='menu-bars' ref={forwardedRef}>
+            <FaIcons.FaBars   />
           </div>
           <div className="head-title">
           <img className='logo' src={Logo} alt="Logo" />

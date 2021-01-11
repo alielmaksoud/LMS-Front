@@ -5,6 +5,7 @@ body {
     sans-serif ;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale ;
+  height: 100%;
 
 }
 
@@ -15,6 +16,7 @@ code {
 
 html {
   background-color: rgba(116, 255, 116, 0.145);
+
 }
 
 /* /* .sidebar {
@@ -66,7 +68,6 @@ div.MuiButtonBase-root > a {
 .nav-menu {
   background-color: #48594B;
   width: 250px;
-  height: 85vh;
   position: absolute;
   z-index: 10;
   top: 30;
@@ -76,9 +77,13 @@ div.MuiButtonBase-root > a {
   -moz-box-shadow:    1px 0 8px 0 #55A661;
   -webkit-box-shadow: 1px 0 8px 0 #55A661;
   box-shadow:         1px 0 8px 0 #55A661;
+  height: 80vh;
+  overflow-y: scroll;
+
 }
 
 .nav-menu.active {
+  height: 84.9vh;
   left: 0;
   transition: 350ms;
   position: absolute;
@@ -86,6 +91,7 @@ div.MuiButtonBase-root > a {
   scrollbar-color: rebeccapurple green;
   scrollbar-width: thin;
   z-index: 10;
+ 
 }
 
 /* these webkits are for stying scroller in chrome */

@@ -29,8 +29,8 @@
     name: 'Classes & Sections',
     label: 'Classes & Sections',
     items: [
+      { name: 'New Class', label: 'New Class', path: '/admin/NewClass' },
       { name: 'Manage Classes', label: 'Manage Classes', path: '/admin/ManageClasses' },
-      { name: 'Manage Sections', label: 'Manage Sections', path: '/admin/ManageSections' },
     ],
   },
 ]

@@ -104,7 +104,7 @@ function EditAdmin(props) {
   .catch((error) => {
    if(error){
      console.log(error);
-    setmessage("oops..")
+    setmessage(error.response.data.message)
     setdisplay({display: 'inline', color: 'red' })
    }
   })
@@ -115,7 +115,7 @@ function EditAdmin(props) {
     <Container component="main" maxWidth="md">
       <div className={NewAdminclass.paperr}>
         <Typography component="h1" variant="h5">
-          Edit Admin
+          Edit Admin Profile
         </Typography>
         {<span style={display}>{message}</span>}
         <form onSubmit={(e)=> handleSubmit(e)} className={NewAdminclass.formm} >

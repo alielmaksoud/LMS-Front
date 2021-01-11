@@ -6,12 +6,18 @@ import useVisible from './Service/useVisible'
 import Protection from './loginPages/Protection'
 import NewAdmin from './Pages/Admins/NewAdmin.js';
 import ManageAdmin from './Pages/Admins/ManageAdmin';
-import EditAdmin from './Pages/Admins/EditAdmin';
+import ManageStudents from './Pages/Students/ManageStudent';
+import NewStudent from './Pages/Students/NewStudent';
+import ManageClasses from './Pages/classes-sections/ManageClass';
+import NewClass from './Pages/classes-sections/NewClass';
+import NotFound from './Pages/Not_Found/NotFound'
+
 
 
 import { 
   BrowserRouter as
    Router,
+  Route,
    Switch }
 from 'react-router-dom';
 
@@ -39,6 +45,21 @@ function Dashboard() {
         <Protection path='/admin/ManageAdmin'>
             <ManageAdmin />
         </Protection>
+        <Protection path='/admin/Managestudents'>
+            <ManageStudents />
+        </Protection>
+        <Protection path='/admin/Newstudent'>
+            <NewStudent />
+        </Protection>
+        <Protection path='/admin/Newclass'>
+            <NewClass />
+        </Protection>
+        <Protection path='/admin/Manageclasses'>
+            <ManageClasses />
+        </Protection>
+        <Route>
+            <NotFound />
+        </Route>
       </Switch>
     </Router>
     </>

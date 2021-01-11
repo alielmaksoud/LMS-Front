@@ -6,7 +6,7 @@ import { Button } from '@material-ui/core';
 import CookieService from '../../Service/CookieService';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import EditAdmin from './EditAdmin';
+import EditStudent from './EditStudent';
 import axios from 'axios';
 
 
@@ -21,7 +21,7 @@ function ManageAdmin() {
           color: 'green',
           position: 'fixed',
           zIndex: '0',
-          width: '70%',
+          width: '75%',
           height: '84vh',
           marginTop: '1%',
           'marginLeft': '15%',
@@ -33,7 +33,7 @@ function ManageAdmin() {
       }));
     const adminsTable = useStyles();
     const cookie = CookieService.get('Bearer');
-    const linkkk = "http://localhost:8000/api/admins/avatars/"
+    const linkkk = "http://localhost:8000/api/students/avatars/"
     
 
    const HandleEdit = () => {
@@ -44,13 +44,14 @@ function ManageAdmin() {
       setLoading(true)
       var config = {
         method: 'get',
-        url: 'http://localhost:8000/api/admin',
+        url: 'http://localhost:8000/api/student',
         headers: { 
           'Authorization': `Bearer ${cookie}`, 
           'Content-Type': 'application/x-www-form-urlencoded'
         }};
           axios(config)
           .then(res => {
+            console.log(res.data)
                   setAdmins(res.data.map((item, index)=>  
                     {return {
                         ...item,
@@ -63,13 +64,12 @@ function ManageAdmin() {
             console.log(err.request)
           })
     },[]);
-    console.log(Admins)
     const DeleteAdmin = async (id, img) => {
         setLoading(true);
-
+        console.log(img)
         var config2 = {
           method: 'Delete',
-          url: `http://localhost:8000/api/admins/delavatar/${img}`,
+          url: `http://localhost:8000/api/students/delavatar/${img}`,
           headers: { 
             'Authorization': `Bearer ${cookie}`, 
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -77,7 +77,7 @@ function ManageAdmin() {
  
         var config = {
         method: 'Delete',
-        url: `http://localhost:8000/api/admin/${id}`,
+        url: `http://localhost:8000/api/student/${id}`,
         headers: { 
           'Authorization': `Bearer ${cookie}`, 
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -85,6 +85,7 @@ function ManageAdmin() {
   
           axios(config)
           .then(res => {
+            console.log(res)
             setAdmins(res.data.map(item =>  
               {return {
                   ...item,
@@ -94,20 +95,20 @@ function ManageAdmin() {
               }}));
                   
           }).catch(err => {
-            console.log(err.request.message)
+            console.log(err)
           })
 
           axios(config2)
           .then(res => {
     
           }).catch(err => {
-            console.log(err.request)
+            console.log(err)
           })
           setLoading(false)
     }
     const columns = [
 
-      { field: 'id', headerName: 'ID', width:65},
+      { field: 'student_id', headerName: 'ID', width:120},
       {
         field: 'image',
         headerName: 'Picture',
@@ -121,21 +122,24 @@ function ManageAdmin() {
       {
         field: 'fullName',
         headerName: 'Full name',
-        width: 160,
+        width: 150,
         valueGetter: (params) =>
           `${params.getValue('first_name') || ''} ${params.getValue('last_name') || ''}`,
       },
      
-      { field: 'role', headerName: 'Role', width: 120},
+      { field: 'class_name', headerName: 'Class', width: 100},
+      { field: 'section_name', headerName: 'Section', width: 100},
       { field: 'email', headerName: 'Email' , width: 160 },
       { field: 'phone', headerName: 'Phone', type:'number', width: 110 },
       {
         field: 'edit',
         headerName: 'Edit',
+        sortable: false,
         renderCell: (params) => (
         
             <Button style={{backgroundColor: '#36C14B'}} variant="contained" size="small" alt="Remy Sharp" onClick={
                () =>  {
+                 console.log(params)
                 setAdminData(Admins[params.value.index]);
                 setEditing(true);
                }}>
@@ -155,7 +159,6 @@ function ManageAdmin() {
       },
       
     ];
-    console.log(HandleEdit)
     if(Loading){
       return (
         <div>
@@ -168,7 +171,7 @@ function ManageAdmin() {
     if(Editing){
       return (
         <div>
-            <EditAdmin AdminData={AdminData} Edit={HandleEdit} />
+            <EditStudent AdminData={AdminData} Edit={HandleEdit} />
         </div>
       )
     }else {

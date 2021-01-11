@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import login from './Dashboard/loginPages/login.js';
 import Protection from './Dashboard/loginPages/Protection';
 import Dashboard from './Dashboard/Dashboard';
+import NotFound from './Dashboard/Pages/Not_Found/NotFound'
 
 
 
@@ -21,6 +22,9 @@ function App() {
                 <Dashboard />
             </Protection> */}
                 <Route  path='/' component={login} />
+                <Route>
+                   <NotFound />
+                </Route>
             </Switch>
         </Router>
       </div>
