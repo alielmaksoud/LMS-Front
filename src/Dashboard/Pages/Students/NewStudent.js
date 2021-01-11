@@ -13,18 +13,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CookieService from '../../Service/CookieService';
 import axios from 'axios'
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" style={{cursor: "alias", textDecoration: "none"}}>
-        Learning Management System
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+
 
 
 const useStyless = makeStyles((themee) => ({
@@ -45,6 +34,8 @@ const useStyless = makeStyles((themee) => ({
     marginLeft: "35%",
     marginRight: "35%",
     width: "30%",
+    marginBottom: '2%',
+    marginTop: '2%',
     color: themee.palette.getContrastText(green[500]),
     backgroundColor: green[500],
     '&:hover': {
@@ -282,9 +273,7 @@ const handleChangeSection = (event) => {
           </Button>
         </form>
       </div>
-      <Box mt={1.3}>
-        <Copyright />
-      </Box>
+     
     </Container>
     </div>
   );

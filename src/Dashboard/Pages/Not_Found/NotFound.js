@@ -3,7 +3,7 @@ import logo from "../../../logo.png"
 const styles = {
     container : {
         backgroundColor : '#bffac8',
-        height : '73.5vh',
+        height : '73vh',
         paddingTop: '5%'
     },
     logo : {
