@@ -12,6 +12,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CookieService from '../../Service/CookieService';
 import { DataGrid } from '@material-ui/data-grid';
+import { useHistory } from "react-router-dom";
 import axios from 'axios'
 
 function Copyright() {
@@ -122,6 +123,7 @@ function NewStudent(props) {
   const [Loading, setLoading] = useState(true)
   const [Sections, setSections] = useState([]);
   const [NewSection, setNewSection] = useState("");
+  const history = useHistory();
 
   useEffect(() => {
     setLoading(true)
@@ -231,10 +233,14 @@ function NewStudent(props) {
      window.location.replace('/admin/ManageClasses')
     })
    .catch((error) => {
-    if(error){
-      console.log(error);
-     setmessage("oops..")
+
+    if(error.response){
+      console.log(error.response.request)
+     setmessage(Object.entries(error.response.data.errors).map((item, index) => " " + item[1] + " "))
      setdisplay({display: 'inline', color: 'red' })
+    }else {
+      setmessage("N e t w o r k  E r r o r")
+      setdisplay({display: 'inline', color: 'red' })
     }
    })
 }
@@ -272,10 +278,12 @@ const newsection = () => {
     reset();
   })
  .catch((error) => {
-  if(error){
-    console.log(error);
-   setmessage("oops..")
+  if(error.response){
+    setmessage(Object.entries(error.response.data.errors).map((item, index) => " " + item[1] + " "))
    setdisplay({display: 'inline', color: 'red' })
+  }else {
+    setmessage("N e t w o r k  E r r o r")
+    setdisplay({display: 'inline', color: 'red' })
   }
  })
 }
@@ -292,7 +300,6 @@ const newsection = () => {
  else {
   return (
     <div className={NewAdminclass.editclass} >
-
       <div className={NewAdminclass.paperr}>
         <Typography component="h1" variant="h5">
           Edit Class
@@ -348,6 +355,19 @@ const newsection = () => {
             className={NewAdminclass.submit}
           >
             Update
+          </Button>
+          <Button
+            type="submit"
+            size="large"
+            variant="contained"
+            color="primary"
+            onClick={()=> {
+                props.Edit()
+                history.push("/admin/ManageClasses");
+            }}
+            className={NewAdminclass.submit}
+          >
+            Back
           </Button>
         </form>
       </div>

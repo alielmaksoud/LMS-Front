@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CookieService from '../../Service/CookieService';
+import { useHistory } from "react-router-dom";
 import axios from 'axios'
 
 
@@ -22,7 +23,7 @@ const useStyless = makeStyles((themee) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    height: '84vh'
+    height: '81vh'
   },
 
   formm: {
@@ -34,8 +35,6 @@ const useStyless = makeStyles((themee) => ({
     marginLeft: "35%",
     marginRight: "35%",
     width: "30%",
-    marginBottom: '2%',
-    marginTop: '2%',
     color: themee.palette.getContrastText(green[500]),
     backgroundColor: green[500],
     '&:hover': {
@@ -72,6 +71,7 @@ function NewStudent() {
   const [Loading, setLoading] = useState(true)
   const [Classes, setClasses] = useState([]);
   const [Sections, setSections] = useState([]);
+  let history = useHistory();
 
 
 
@@ -107,7 +107,7 @@ function NewStudent() {
     fd.append("phone", data.phone)
     fd.append("section_id", data.section_id)
     fd.append("class_id", data.class_id)
-    fd.append("picture", data.first_name + "-" + data.last_name)
+    fd.append("picture", data.first_name.slice(-2) + data.phone.slice(-1) + data.last_name.slice(-2))
     let headers = {
       headers: {
         'Content-Type':'form-data',
@@ -122,11 +122,13 @@ function NewStudent() {
     reset();
    })
   .catch((error) => {
-   if(error){
-    console.log(error.response.data.message)
-    setmessage(error.response.data.message)
+   if(error.response){
+    setmessage(Object.entries(error.response.data.errors).map((item, index) => " " + item[1] + " "))
     setdisplay({display: 'inline', color: 'red' })
-   }
+   }else {
+    setmessage("N e t w o r k  E r r o r")
+    setdisplay({display: 'inline', color: 'red' })
+  }
   })
 }
 const handleChangeSection = (event) => {
@@ -205,7 +207,7 @@ const handleChangeSection = (event) => {
                 inputRef={register}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={2}>
             <TextField
               id="class_id"
               select
@@ -215,7 +217,7 @@ const handleChangeSection = (event) => {
               SelectProps={{
               native: true,
           }}
-          helperText="Please select CLass"
+          helperText="Please select Class"
         >
           {Classes.map((option) => { 
             return (
@@ -227,7 +229,7 @@ const handleChangeSection = (event) => {
           )}
         </TextField>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={2}>
             <TextField
               id="section_id"
               select
@@ -271,9 +273,20 @@ const handleChangeSection = (event) => {
           >
             Sign Up
           </Button>
+          <Button
+            type="submit"
+            size="large"
+            variant="contained"
+            color="primary"
+            onClick={()=> {
+                history.push("/admin/ManageStudents");
+            }}
+            className={NewAdminclass.submit}
+          >
+            Cancel
+          </Button>
         </form>
       </div>
-     
     </Container>
     </div>
   );

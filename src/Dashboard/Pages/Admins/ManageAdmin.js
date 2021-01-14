@@ -25,11 +25,16 @@ function ManageAdmin() {
           height: '84vh',
           marginTop: '1%',
           'marginLeft': '15%',
+         
         },
         backdrop: {
           zIndex: theme.zIndex.drawer + 1,
           color: 'green',
         },
+        manageadmins : {
+          backgroundColor: "rgba(116, 255, 116, 0.145)",
+          height: '84vh'
+        }
       }));
     const adminsTable = useStyles();
     const cookie = CookieService.get('Bearer');
@@ -173,8 +178,10 @@ function ManageAdmin() {
       )
     }else {
   return (
+    <div className={adminsTable.manageadmins} >
     <div className={adminsTable.adminsTable} >
       <DataGrid rows={Admins} columns={columns} pageSize={8}/>
+    </div>
     </div>
   );
     }

@@ -2,12 +2,9 @@
 
  const items = [
   {
-    name: 'Admins',
-    label: 'Admin',
-    items: [
-      { name: 'Manage Admins', label: 'Manage Admins',path: '/admin/ManageAdmin' },
-      { name: 'New Admin', label: 'New Admin', path: '/admin/NewAdmin' },
-    ],
+    name: 'Reports',
+    label: 'Reports',
+    path: '/admin/'
   },
   {
     name: 'Students',
@@ -18,19 +15,19 @@
     ],
   },
   {
-    name: 'Attendance',
-    label: 'Attendance',
-    items: [
-      { name: 'Student Attendance', label: 'Student Attendance', path: '/admin/StudentAttence' },
-      { name: 'Class Attendance', label: 'Class Attendance', path: '/admin/ClassAttendance' },
-    ],
-  },
-  {
     name: 'Classes & Sections',
     label: 'Classes & Sections',
     items: [
       { name: 'New Class', label: 'New Class', path: '/admin/NewClass' },
       { name: 'Manage Classes', label: 'Manage Classes', path: '/admin/ManageClasses' },
+    ],
+  },
+  {
+    name: 'Admins',
+    label: 'Administrators',
+    items: [
+      { name: 'New Admin', label: 'New Admin', path: '/admin/NewAdmin' },
+      { name: 'Manage Admins', label: 'Manage Admins',path: '/admin/ManageAdmin' },
     ],
   },
 ]

@@ -63,8 +63,11 @@ const useStylesss = makeStyles((themee) => ({
       marginTop: '1%',
       'marginLeft': '15%',
     },
- 
   },
+  editclass : {
+    backgroundColor: "rgba(116, 255, 116, 0.145)",
+    height: '83vh'
+  }
 }));
 
 
@@ -102,11 +105,17 @@ function NewClass() {
     setLoading(false)
    })
   .catch((error) => {
-   if(error){
+   if(error.response){
      console.log(error);
-    setmessage("oops..")
+     console.log(error.response.data)
+      setmessage(Object.entries(error.response.data.errors).map((item, index) => " " + item[1] + " "))
     setdisplay({display: 'inline', color: 'red' })
-   }
+    setLoading(false)
+   }else {
+    setmessage("N e t w o r k  E r r o r")
+    setdisplay({display: 'inline', color: 'red' })
+    setLoading(false)
+  }
 
   })
 }
@@ -123,7 +132,7 @@ function NewClass() {
  }
  else {
   return (
-    <div style={{backgroundColor: 'rgba(116, 255, 116, 0.145)'}} className='loginmain' >
+    <div className={NewAdminclass.editclass} >
     <Container component="main" maxWidth="md">
       <div className={NewAdminclass.paperr}>
         <Typography component="h1" variant="h5">

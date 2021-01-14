@@ -10,20 +10,9 @@ import Container from '@material-ui/core/Container';
 import { green } from '@material-ui/core/colors';
 import { useForm } from "react-hook-form";
 import CookieService from '../../Service/CookieService';
+import { useHistory } from "react-router-dom";
 import axios from 'axios'
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" style={{cursor: "alias", textDecoration: "none"}}>
-        Learning Management System
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const useStyless = makeStyles((themee) => ({
   paperr: {
@@ -53,11 +42,13 @@ const useStyless = makeStyles((themee) => ({
       zIndex: themee.zIndex.drawer + 1,
       color: 'green',
     },
-    editclass : {
-      backgroundColor: '#bffac8',
-      height: '100%'
-    }
+   
   },
+  editclass : {
+    backgroundColor: "rgba(116, 255, 116, 0.145)",
+    height: '83vh'
+  }
+ 
 }));
 
 
@@ -68,6 +59,7 @@ function NewAdmin() {
   const NewAdminclass = useStyless();
   const [display, setdisplay] = useState({display: 'None', color: 'red' });
   const [message, setmessage] = useState("none");
+  let history = useHistory();
 
 
   const Create = async (data) => {
@@ -79,7 +71,7 @@ function NewAdmin() {
     fd.append("email", data.email)
     fd.append("phone", data.phone)
     fd.append("password", data.password)
-    fd.append("picture", data.first_name + "-" + data.last_name)
+    fd.append("picture", data.first_name.slice(-2) + data.phone.slice(-1) + data.last_name.slice(-2))
     let headers = {
       headers: {
         'Content-Type':'form-data',
@@ -93,15 +85,18 @@ function NewAdmin() {
     reset();
    })
   .catch((error) => {
-   if(error){
-     console.log(error);
-    setmessage(error.response.data.message)
+   if(error.response){
+     console.log(error.response.data);
+     setmessage(Object.entries(error.response.data.errors).map((item, index) => " " + item[1] + " "))
     setdisplay({display: 'inline', color: 'red' })
-   }
+   }else {
+    setmessage("N e t w o r k  E r r o r")
+    setdisplay({display: 'inline', color: 'red' })
+  }
   })
 }
   return (
-    <div style={{backgroundColor: 'rgba(116, 255, 116, 0.145)'}} className={NewAdminclass.editclass} >
+    <div className={NewAdminclass.editclass} >
     <Container  component="main" maxWidth="md">
       <div className={NewAdminclass.paperr}>
         <Typography component="h1" variant="h5">
@@ -205,11 +200,21 @@ function NewAdmin() {
           >
             Sign Up
           </Button>
+          <Button
+            type="submit"
+            size="large"
+            variant="contained"
+            color="primary"
+            onClick={()=> {
+                history.push("/admin/ManageAdmin");
+                
+            }}
+            className={NewAdminclass.submit}
+          >
+            Cancel
+          </Button>
         </form>
       </div>
-      <Box mt={1.3}>
-        <Copyright />
-      </Box>
     </Container>
     </div>
   );

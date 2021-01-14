@@ -3,11 +3,11 @@ import logo from "../../../logo.png"
 const styles = {
     container : {
         backgroundColor : '#bffac8',
-        height : '73vh',
+        height : '89vh',
         paddingTop: '5%'
     },
     logo : {
-        
+        marginTop: '6%',
         display : 'flex',
         flexDisplay: 'column',
         justifyContent: 'center',

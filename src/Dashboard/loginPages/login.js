@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Login() {
+function Login(props) {
 
   const classes = useStyles();
   let history = useHistory();
@@ -73,6 +73,7 @@ function Login() {
   const { register , handleSubmit, errors } = useForm();
   const cookie = CookieService.get('Bearer');
   const [Verified, setVerified ] = useState("");
+  const [message, setmessage] = useState("")
 
   useEffect(() => {
     var config = {
@@ -106,14 +107,16 @@ function Login() {
       password: data.password
     })
     .then(res => {
-      //document.cookie = `Bearer=${res.data.access_token}; path=/; max-Age=${res.data.expires_in}`
       CookieService.set('Bearer ', res.data.access_token, { path: "/", 'max-Age': res.data.expires_in})
+      CookieService.set('av ', res.data.av, { path: "/", 'max-Age': res.data.expires_in})
       history.push("/admin");
     })
   .catch((error) => {
-    if(error){
-  
-      console.log(error);
+    if(error.response){
+      setmessage(Object.entries(error.response.data.error).map((item, index) => " " + item[1] + " "))
+      setdisplay('inline');
+    }else {
+      setmessage("N e t w o r k  E r r o r")
       setdisplay('inline');
     }
   })
@@ -158,7 +161,7 @@ function Login() {
           Sign in
         </Typography>
         {errors.exampleRequired && <span>This field is lalaa</span>}
-        {<span style={{display: display, color: 'red' }}>oops..</span>}
+        {<span style={{display: display, color: 'red' }}>{message}</span>}
         <form onSubmit={handleSubmit((data) => Auth(data))} className={classes.form}>
           <TextField
             variant="outlined"

@@ -59,10 +59,10 @@ div.MuiButtonBase-root > a {
 }
 
 .menu-bars {
-  margin-left: 2rem;
-  font-size: 2rem;
-  background: none;
+  margin-left: 2rem !important;
+  font-size: 2rem !important;
   cursor: pointer;
+  border-radius: 25% !important;
 }
 
 .nav-menu {
@@ -134,10 +134,12 @@ div.MuiButtonBase-root > a {
 .logoutbutton{
 
   font-size: 0.9rem;
-  font-family: 'Roboto';
-  color: whitesmoke;
-  margin-right: 30px;
+  font-family: 'Roboto' !important;
+  color: whitesmoke !important;
+  border-radius: 25px !important;
+  margin-right: 20px !important;
   cursor: pointer;
+
 }
 
 .Link {

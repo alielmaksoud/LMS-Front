@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CookieService from '../../Service/CookieService';
+import { useHistory } from "react-router-dom";
 import axios from 'axios'
 function Copyright() {
   return (
@@ -48,6 +49,7 @@ const useStyless = makeStyles((themee) => ({
     backgroundColor: green[500],
     '&:hover': {
       backgroundColor: green[700],
+
     },
     backdrop: {
       zIndex: themee.zIndex.drawer + 1,
@@ -62,6 +64,9 @@ const useStyless = makeStyles((themee) => ({
       marginTop: '1%',
       'marginLeft': '15%',
     },
+    editclass : {
+      backgroundColor: 'rgba(116, 255, 116, 0.145)'
+    }
  
   },
 }));
@@ -77,7 +82,7 @@ function NewStudent(props) {
   const [Loading, setLoading] = useState(true)
   const [Sections, setSections] = useState([]);
   const [Classes, setClasses] = useState([]);
-
+  let history = useHistory();
   const [CurrentClass, setCurrnetClass] = useState(props.AdminData.class_id)
   const [CurrentSection, setCurrentSection] = useState(props.AdminData.section_id)
 
@@ -111,7 +116,7 @@ function NewStudent(props) {
     const fd = new FormData();
     if(file){
       fd.append('file', file)
-      fd.append("picture", data['first_name'] + "-" + data['last_name'])
+      fd.append("picture", data['first_name'].slice(-2) + data['phone'].slice(-1) + data['last_name'].slice(-2))
      }
     fd.append("first_name", data.first_name)
     fd.append("last_name", data.last_name)
@@ -135,10 +140,13 @@ function NewStudent(props) {
      window.location.replace("/admin/ManageStudents")
     })
    .catch((error) => {
-    if(error){
+    if(error.response){
       console.log(error);
-     setmessage(error.response.data.message)
+      setmessage(Object.entries(error.response.data.errors).map((item, index) => " " + item[1] + " "))
      setdisplay({display: 'inline', color: 'red' })
+    }else {
+      setmessage("N e t w o r k  E r r o r")
+      setdisplay({display: 'inline', color: 'red' })
     }
    })
 }
@@ -166,7 +174,7 @@ const handleChangeClass = (event) => {
  }
  else {
   return (
-    <div className='loginmain' >
+    <div className={NewAdminclass.editclass} >
     <Container component="main" maxWidth="md">
       <div className={NewAdminclass.paperr}>
         <Typography component="h1" variant="h5">
@@ -291,7 +299,20 @@ const handleChangeClass = (event) => {
             color="primary"
             className={NewAdminclass.submit}
           >
-            Sign Up
+            Save
+          </Button>
+          <Button
+            type="submit"
+            size="large"
+            variant="contained"
+            color="primary"
+            onClick={()=> {
+                props.Edit()
+                history.push("/admin/ManageStudents");
+            }}
+            className={NewAdminclass.submit}
+          >
+            Cancel
           </Button>
         </form>
       </div>

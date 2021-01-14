@@ -52,6 +52,9 @@ const useStyless = makeStyles((themee) => ({
       zIndex: themee.zIndex.drawer + 1,
       color: 'green',
     },
+    editclass : {
+      backgroundColor: 'rgba(116, 255, 116, 0.145)'
+    }
   },
 }));
 
@@ -77,7 +80,7 @@ function EditAdmin(props) {
      const fdd = new FormData();
      if(file){
       fdd.append('file', file)
-      fdd.append("picture", AdminData['first_name'] + "-" + AdminData['last_name'])
+      fdd.append("picture", AdminData['first_name'].slice(-2) + AdminData['phone'].slice(-1) + AdminData['last_name'].slice(-2))
       // console.log(AdminData)
      }
     fdd.append("first_name", AdminData['first_name'])
@@ -102,16 +105,19 @@ function EditAdmin(props) {
     window.location.replace("/admin/ManageAdmin")
    })
   .catch((error) => {
-   if(error){
+   if(error.response){
      console.log(error);
-    setmessage(error.response.data.message)
+     setmessage(Object.entries(error.response.data.errors).map((item, index) => " " + item[1] + " "))
     setdisplay({display: 'inline', color: 'red' })
-   }
+   }else {
+    setmessage("N e t w o r k  E r r o r")
+    setdisplay({display: 'inline', color: 'red' })
+  }
   })
 
 }  
   return (
-    <div className='loginmain' >
+    <div className={NewAdminclass.editclass} >
     <Container component="main" maxWidth="md">
       <div className={NewAdminclass.paperr}>
         <Typography component="h1" variant="h5">
@@ -235,7 +241,7 @@ function EditAdmin(props) {
             }}
             className={NewAdminclass.submit}
           >
-            Cancel
+            Back
           </Button>
         </form>
       </div>

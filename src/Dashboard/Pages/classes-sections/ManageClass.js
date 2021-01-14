@@ -24,14 +24,14 @@ function ManageAdmin() {
           color: 'green',
           zIndex: '0',
           width: '50%',
-          height: '84vh',
+          height: '65vh',
           marginTop: '1%',
           'marginLeft': '25%',
           
         },
         manageclass : {
           backgroundColor: "rgba(116, 255, 116, 0.145)",
-          height: '84.5vh',
+          height:'84vh',
           textAlign: 'center'
 
         },
