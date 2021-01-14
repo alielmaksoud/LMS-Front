@@ -20,17 +20,33 @@ const Styles = {
         padding : '2%',
         gap : '2%',
         backgroundColor: 'rgba(116, 255, 116, 0.145)'
-
     },
     donut: {
         width : "50vw",
 
     },
+    donutpaper:{
+        backgroundColor: 'rgba(116, 255, 116, 0.145)',
+        
+    },
+    donutsearch:{
+        display:'flex',
+        flexDisplay:'column',
+        justifyContent:'center'
+
+    },
+    donutTitle:{
+        marginTop:'0',
+        paddingTop:'2%',
+        textAlign:'center',
+        fontSize:'1.5rem',
+        fontWeight:'400',
+        fontFamily:'"Roboto", "Helvetica", "Arial", "sans-serif"'
+    },
     bars : {
         width : "50vw",
-        
- 
     }
+    
 
 }
 
@@ -58,8 +74,11 @@ const Reports = () => {
     return (
         <div style={Styles.container}>
             <div style={Styles.donut}>
-                <Paper style={{backgroundColor: 'rgba(116, 255, 116, 0.145)'}}>
-                <DonutSearch/>
+                <Paper style={Styles.donutpaper}>
+                <h4 style={Styles.donutTitle}>Student Attendance</h4>
+                <div style={Styles.donutsearch}>
+                    <DonutSearch/>
+                </div>
                 <Chart
                     data={Donut}
                 >
@@ -71,9 +90,6 @@ const Reports = () => {
                     onClick={(e)=> {
                         console.log(e.target.attributes.d.value)
                     }}
-                    />
-                    <Title
-                    text="Student Attendance"
                     />
                     <Animation />
                     <EventTracker />
