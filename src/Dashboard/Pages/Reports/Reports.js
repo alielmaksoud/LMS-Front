@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Paper from '@material-ui/core/Paper';
+import DonutSearch from './DonutSearch';
 import {
   Chart,
   PieSeries,
@@ -10,6 +11,7 @@ import {
 } from '@devexpress/dx-react-chart-material-ui';
 
 import { Animation, EventTracker, HoverState} from '@devexpress/dx-react-chart';
+
 
 const Styles = {
     container : {
@@ -57,6 +59,7 @@ const Reports = () => {
         <div style={Styles.container}>
             <div style={Styles.donut}>
                 <Paper style={{backgroundColor: 'rgba(116, 255, 116, 0.145)'}}>
+                <DonutSearch/>
                 <Chart
                     data={Donut}
                 >
