@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Paper from '@material-ui/core/Paper';
 import DonutSearch from './DonutSearch';
-import GroupedSelect from './BarsSearch'
+import BarsSearch from './BarsSearch'
+import BarsDate from './BarsDate'
 import CookieService from '../../Service/CookieService';
 import axios from 'axios'
 import Keys from './keys'
@@ -162,7 +163,7 @@ const Reports = () => {
                 <Paper style={{backgroundColor: 'rgba(116, 255, 116, 0.145)'}}>
                 <h4 style={Styles.donutTitle}>Section Attendance</h4>
                 <div style={Styles.search}>
-                    <GroupedSelect/>
+                    <BarsSearch/>
                 </div>
                 <Chart
                 data={Barsz}

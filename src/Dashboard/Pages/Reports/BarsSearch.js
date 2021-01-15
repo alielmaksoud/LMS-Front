@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
   
-export default function GroupedSelect() {
+export default function BarsSearch() {
   const classes = useStyles();
   const cookie = CookieService.get('Bearer');
   const [Loading, setLoading] = useState(true);
@@ -49,14 +49,18 @@ export default function GroupedSelect() {
         <Select native defaultValue="" id="grouped-native-select">
           <option aria-label="None" value="" />
           {Classes.map((option) => { 
+              console.log(option.getsections)
               return (
                 <optgroup label={option.class_name} key={option.id} value={option.id}>
-                    <option>
+                    
                         {option.getsections.map((item)=>{
-                        <option label={item.section_name} value={1}></option>
+                            return(
+                                <>
+                                <option label={item.section_name} value={1}></option>
+                                </>
+                            )
 
                     })}
-                    </option>
                 </optgroup>
                 )
            
