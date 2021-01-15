@@ -50,6 +50,15 @@ const Styles = {
         fontWeight:'400',
         fontFamily:'"Roboto", "Helvetica", "Arial", "sans-serif"'
     },
+    search:{
+        display:'flex',
+        flexDisplay:'column',
+        justifyContent: 'center',
+        gap:'5rem'
+    },
+    barSearch:{
+        paddingTop:'0.5em'
+    },
     bars : {
         width : "50vw",
     }
@@ -163,7 +172,9 @@ const Reports = () => {
                 <Paper style={{backgroundColor: 'rgba(116, 255, 116, 0.145)'}}>
                 <h4 style={Styles.donutTitle}>Section Attendance</h4>
                 <div style={Styles.search}>
-                    <BarsSearch/>
+                <BarsSearch/>
+                    <div style={Styles.barSearch}><BarsDate/></div>  
+                    
                 </div>
                 <Chart
                 data={Barsz}
