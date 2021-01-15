@@ -9,7 +9,6 @@ export default function DonutSearch(props) {
     const cookie = CookieService.get('Bearer');
     const [Loading, setLoading] = useState(true);
     const [Student, setStudent] = useState([]);
-    const [StudentID, setStudentID] = useState([]);
 
     useEffect(() => {
         setLoading(true)
@@ -40,7 +39,7 @@ export default function DonutSearch(props) {
   return (
     <Autocomplete
       id="student_id"
-      onChange={(event, value) => props.setStudent(value)}
+      onChange={(event, value) => value ? props.setStudent(value) : null}
       options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
       groupBy={(option) => option.firstLetter}
       getOptionLabel={(option) => option.first_name + " " + option.last_name}

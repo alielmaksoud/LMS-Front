@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Paper from '@material-ui/core/Paper';
 import DonutSearch from './DonutSearch';
+import GroupedSelect from './BarsSearch'
 import CookieService from '../../Service/CookieService';
 import axios from 'axios'
+import Keys from './keys'
 
 
 import {
@@ -57,16 +59,18 @@ const Styles = {
 
 const Reports = () => {
     const cookie = CookieService.get('Bearer');
-    const [studentId, setStudentId] = useState({});
-    const [singleAttendance, setSingleAttendance] = useState({});
-    var present = [];
-    var late = [];
-    var absent = [];
+    const [studentId, setStudentId] = useState(1);
+    const [singleAttendance, setSingleAttendance] = useState([]);
+    const [totalAttendance, setTotalAttendance] = useState([]);
+    const [Present, setPresent] = useState(5);
+    const [Late, setLate] = useState(3);
+    const [Absent, setAbsent] = useState(1);
+
+
 
     const setStudent = (student) => {
         setStudentId(student.id);
     }
-    console.log(studentId);
 
     useEffect ( async () => {
         var config = {
@@ -78,31 +82,42 @@ const Reports = () => {
           }};
           try{
             let res = await axios(config)
+              if(res.data) {
             setSingleAttendance(res.data)
-            console.log(res)
+            setTotalAttendance(res.data.length)
+            }
           }
           catch(e){
             console.log(e);
           }
-         singleAttendance.forEach((item) =>{
-             if(item.status === 'present'){
-                 present.push(item);
-             }
-             if(item.status === 'late'){
-                late.push(item);
-            }
-            if(item.status === 'absent'){
+         
+      },[studentId]);
+      useEffect ( async () => {
+         var present =[];
+         var late =[];
+         var absent =[];
+
+            singleAttendance.forEach((item) =>{
+               
+                if(item.status === 'present'){
+                    present.push(item);
+                    
+                }else if(item.status === 'late'){
+                    late.push(item);
+               }else if(item.status === 'absent'){
                 absent.push(item);
             }
-             
-         })   
-      },[studentId]);
-      console.log(present);
+            }) 
+            setPresent(present.length)
+            setLate(late.length)
+            setAbsent(absent.length)
+      },[singleAttendance]);
+      
 
     const Donut = [
-        { Attendance: 'Present', val: 1},
-        { Attendance: 'Late', val: 1},
-        { Attendance: 'Absent', val: 1},
+        { Attendance: 'Present', val: Present },
+        { Attendance: 'Late', val: Absent },
+        { Attendance: 'Absent', val:Late },
   
       
       ];
@@ -140,10 +155,15 @@ const Reports = () => {
                     <EventTracker />
                      <HoverState />
                 </Chart>
+                <Keys Present={Present} Late={Late} Absent={Absent} totalAttendance={totalAttendance} />
                 </Paper>
             </div>
              <div style={Styles.bars}>
                 <Paper style={{backgroundColor: 'rgba(116, 255, 116, 0.145)'}}>
+                <h4 style={Styles.donutTitle}>Section Attendance</h4>
+                <div style={Styles.search}>
+                    <GroupedSelect/>
+                </div>
                 <Chart
                 data={Barsz}
                 >
@@ -156,7 +176,6 @@ const Reports = () => {
                     color="#55A661"
                   
                 />
-                <Title text="Section Attendance" />
                 <Animation />
                  <EventTracker />
                      <HoverState />
