@@ -85,7 +85,6 @@ function NewStudent(props) {
   let history = useHistory();
   const [CurrentClass, setCurrnetClass] = useState(props.AdminData.class_id)
   const [CurrentSection, setCurrentSection] = useState(props.AdminData.section_id)
-
   useEffect(() => {
     setLoading(true)
     var config = {
@@ -160,7 +159,6 @@ const handleChangeClass = (event) => {
 
  const handleChangeSection = (event) => {
    setCurrentSection(Sections.filter(item => item.id == event.target.value)[0].id)
- 
  };
 
  if(Loading) {

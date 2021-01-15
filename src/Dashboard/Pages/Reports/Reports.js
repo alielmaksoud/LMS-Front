@@ -50,9 +50,10 @@ const Styles = {
 
 }
 
-const Reports = () => {
 
+const Reports = (props) => {
 
+    // const [studentId, setStudentId] = useState(props.StudentId);
 
     const Donut = [
         { Attendance: 'Present', val: 1},
