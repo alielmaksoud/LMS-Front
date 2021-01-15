@@ -48,11 +48,11 @@ function keys(props) {
 
                 <div style={Styles.key}>
                     <div style={Styles.redSquare}></div>
-                    <p style={Styles.attendance}>Late: {props.Late}</p> 
+                    <p style={Styles.attendance}>Absent: {props.Absent}</p> 
                 </div>
                 <div style={Styles.key}>
                     <div style={Styles.blueSquare}></div>
-                    <p style={Styles.attendance}>Absent: {props.Absent}</p>  
+                    <p style={Styles.attendance}>Late: {props.Late}</p>  
                 </div>
 
             </div>
