@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
 import Paper from '@material-ui/core/Paper';
 import DonutSearch from './DonutSearch';
+import CookieService from '../../Service/CookieService';
+import axios from 'axios'
+
+
 import {
   Chart,
   PieSeries,
@@ -51,9 +55,49 @@ const Styles = {
 }
 
 
-const Reports = (props) => {
+const Reports = () => {
+    const cookie = CookieService.get('Bearer');
+    const [studentId, setStudentId] = useState({});
+    const [singleAttendance, setSingleAttendance] = useState({});
+    var present = [];
+    var late = [];
+    var absent = [];
 
-    // const [studentId, setStudentId] = useState(props.StudentId);
+    const setStudent = (student) => {
+        setStudentId(student.id);
+    }
+    console.log(studentId);
+
+    useEffect ( async () => {
+        var config = {
+          method: 'get',
+          url: `http://localhost:8000/api/attendance/${studentId}`,
+          headers: { 
+            'Authorization': `Bearer ${cookie}`, 
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }};
+          try{
+            let res = await axios(config)
+            setSingleAttendance(res.data)
+            console.log(res)
+          }
+          catch(e){
+            console.log(e);
+          }
+         singleAttendance.forEach((item) =>{
+             if(item.status === 'present'){
+                 present.push(item);
+             }
+             if(item.status === 'late'){
+                late.push(item);
+            }
+            if(item.status === 'absent'){
+                absent.push(item);
+            }
+             
+         })   
+      },[studentId]);
+      console.log(present);
 
     const Donut = [
         { Attendance: 'Present', val: 1},
@@ -78,7 +122,7 @@ const Reports = (props) => {
                 <Paper style={Styles.donutpaper}>
                 <h4 style={Styles.donutTitle}>Student Attendance</h4>
                 <div style={Styles.donutsearch}>
-                    <DonutSearch/>
+                    <DonutSearch setStudent={setStudent} />
                 </div>
                 <Chart
                     data={Donut}

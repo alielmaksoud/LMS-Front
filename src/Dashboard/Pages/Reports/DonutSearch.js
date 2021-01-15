@@ -5,7 +5,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import axios from 'axios'
 import CookieService from '../../Service/CookieService';
 
-export default function DonutSearch() {
+export default function DonutSearch(props) {
     const cookie = CookieService.get('Bearer');
     const [Loading, setLoading] = useState(true);
     const [Student, setStudent] = useState([]);
@@ -36,12 +36,11 @@ export default function DonutSearch() {
       ...option,
     };
   });
-  const handleChange = () => {
-   };
+ 
   return (
     <Autocomplete
       id="student_id"
-      onChange={handleChange}
+      onChange={(event, value) => props.setStudent(value)}
       options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
       groupBy={(option) => option.firstLetter}
       getOptionLabel={(option) => option.first_name + " " + option.last_name}
