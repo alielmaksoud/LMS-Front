@@ -48,7 +48,8 @@ const Styles = {
         textAlign:'center',
         fontSize:'1.5rem',
         fontWeight:'400',
-        fontFamily:'"Roboto", "Helvetica", "Arial", "sans-serif"'
+        fontFamily:'"Roboto", "Helvetica", "Arial", "sans-serif"',
+        marginBottom:'1rem',
     },
     search:{
         display:'flex',
@@ -59,6 +60,10 @@ const Styles = {
     barSearch:{
         paddingTop:'0.5em'
     },
+    totalStudents:{
+      fontFamily:'"Roboto", "Helvetica", "Arial", "sans-serif"',
+      fontWeight:'400'
+  },
     bars : {
         width : "50vw",
     }
@@ -80,25 +85,29 @@ const Reports = () => {
     }
     const [sectionAttendance, setSectionAttendance] = useState([]);
     const [sectionId, setSectionId] = useState(1);
-    const [attendanceByDate, setAttendanceByDate] = useState();
+    const [attendanceByDate, setAttendanceByDate] = useState([]);
     const [display, setdisplay] = useState({display: 'None', color: 'red' });
     const [message, setmessage] = useState("none");
-    const [attendanceDate, setAttendanceDate] = useState();
+    const [BarPresent, setBarPresent] = useState(5);
+    const [BarLate, setBarLate] = useState(3);
+    const [BarAbsent, setBarAbsent] = useState(1);
+    const [totalStudents, settotalstudents] = useState(0);
 
     const setSection = (sectionId) => {
         setSectionId(sectionId);
-        console.log(sectionId)
     }
+    console.log(sectionId)
     const setDate = (date) => {
         const filtered = sectionAttendance.filter(item => item.date === date)
-        if (filtered){
+        if (filtered && filtered.length !== 0){
             setAttendanceByDate(filtered)
+            setdisplay({display: 'none', textAlign:'center', color: 'red' })
+            settotalstudents(filtered.length)
         }else {
-            setmessage('No Attendance for the specified date!!!')
-            setdisplay({display: 'inline', color: 'red' })
+            setmessage('No Attendance for the specified date!')
+            setdisplay({display: 'inline-block', textAlign:'center', width:'100%', color: 'red' })
+            settotalstudents(0)
         }
-        
-
     }
 
     useEffect ( async () => {
@@ -118,28 +127,27 @@ const Reports = () => {
           }
           catch(e){
             console.log(e);
-          }
-         
+          }  
       },[studentId]);
       useEffect ( async () => {
-         var present =[];
-         var late =[];
-         var absent =[];
+         var Present =[];
+         var Late =[];
+         var Absent =[];
 
             singleAttendance.forEach((item) =>{
                
                 if(item.status === 'present'){
-                    present.push(item);
+                  Present.push(item);
                     
                 }else if(item.status === 'late'){
-                    late.push(item);
+                  Late.push(item);
                }else if(item.status === 'absent'){
-                absent.push(item);
+                Absent.push(item);
             }
             }) 
-            setPresent(present.length)
-            setLate(late.length)
-            setAbsent(absent.length)
+            setPresent(Present.length)
+            setLate(Late.length)
+            setAbsent(Absent.length)
       },[singleAttendance]);
       
 
@@ -170,10 +178,38 @@ const Reports = () => {
          
       },[sectionId]);
     console.log( attendanceByDate, 'hahahhah' )
+    useEffect ( async () => {
+      var barPresent =[];
+      var barLate =[];
+      var barAbsent =[];
+
+      attendanceByDate.forEach((item) =>{
+            
+             if(item.status === 'present'){
+              barPresent.push(item);
+                 
+             }else if(item.status === 'late'){
+              barLate.push(item);
+            }else if(item.status === 'absent'){
+              barAbsent.push(item);
+         }
+         }) 
+         if (totalStudents !== 0){
+          setBarPresent(barPresent.length)
+          setBarLate(barLate.length)
+          setBarAbsent(barAbsent.length)
+          }
+          else{
+            setBarPresent(0)
+            setBarLate(0)
+            setBarAbsent(0)
+          }
+   },[attendanceByDate, totalStudents]);
+   console.log(BarPresent)
       const Barsz = [
-        { Attendance: 'Present', Students: 30  },
-        { Attendance: 'Late', Students: 5 },
-        { Attendance: 'Absent', Students: 2 },
+        { Attendance: 'Present' + ': ' + BarPresent , Students: BarPresent  },
+        { Attendance: 'Late' + ': ' + BarLate , Students: BarLate},
+        { Attendance: 'Absent' + ': ' + BarAbsent , Students: BarAbsent },
    
       ];
 
@@ -214,9 +250,9 @@ const Reports = () => {
                 <BarsSearch setSection={setSection} />
                 <div style={Styles.barSearch} >
                     <BarsDate setDate={setDate}/>
-                </div>  
-                    
+                </div>   
                 </div>
+                <h3 style={Styles.totalStudents}> Number of Students: {totalStudents} </h3>                
                 <Chart
                 data={Barsz}
                 >
