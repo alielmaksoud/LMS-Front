@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
   
-export default function BarsSearch() {
+export default function BarsSearch(props) {
   const classes = useStyles();
   const cookie = CookieService.get('Bearer');
   const [Loading, setLoading] = useState(true);
@@ -46,7 +46,8 @@ export default function BarsSearch() {
     <div>
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="grouped-native-select">Select Section</InputLabel>
-        <Select native defaultValue="" id="grouped-native-select">
+        <Select native defaultValue="" id="grouped-native-select" onChange={(event) => event.target ? props.setSection(event.target ) : null}
+>
           <option aria-label="None" value="" />
           {Classes.map((option) => { 
               console.log(option.getsections)
@@ -66,14 +67,7 @@ export default function BarsSearch() {
            
           }
           )}
-          {/* <optgroup label="Category 1">
-            <option value={1}>Option 1</option>
-            <option value={2}>Option 2</option>
-          </optgroup>
-          <optgroup label="Category 2">
-            <option value={3}>Option 3</option>
-            <option value={4}>Option 4</option>
-          </optgroup> */}
+          
         </Select>
       </FormControl>
       

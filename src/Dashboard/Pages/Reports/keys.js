@@ -41,19 +41,22 @@ function keys(props) {
         <div style={Styles.container}>
             <h3 style={Styles.totalAttendance}> {props.totalAttendance}  Learning Days </h3>
             <div style={Styles.keys}>
-                <div style={Styles.key}>
-                    <div style={Styles.greenSquare}></div>
-                    <p style={Styles.attendance}>Present: {props.Present} </p>  
+            <div style={Styles.key}>
+                    <div style={Styles.blueSquare}></div>
+                    <p style={Styles.attendance}>Present: {props.Present}</p>  
                 </div>
+
 
                 <div style={Styles.key}>
                     <div style={Styles.redSquare}></div>
                     <p style={Styles.attendance}>Absent: {props.Absent}</p> 
                 </div>
+
                 <div style={Styles.key}>
-                    <div style={Styles.blueSquare}></div>
-                    <p style={Styles.attendance}>Late: {props.Late}</p>  
+                    <div style={Styles.greenSquare}></div>
+                    <p style={Styles.attendance}>Late: {props.Late} </p>  
                 </div>
+                
 
             </div>
         </div>

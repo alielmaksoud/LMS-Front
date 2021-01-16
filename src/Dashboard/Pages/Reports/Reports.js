@@ -75,11 +75,17 @@ const Reports = () => {
     const [Present, setPresent] = useState(5);
     const [Late, setLate] = useState(3);
     const [Absent, setAbsent] = useState(1);
-
-
-
     const setStudent = (student) => {
         setStudentId(student.id);
+    }
+    const [allAttendance, setAllAttendance] = useState([]);
+    const [sectionId, setSectionId] = useState(1);
+    const setSection = (section) => {
+        setSectionId(section.id);
+        console.log(section)
+    }
+    const setDate = (date) => {
+        //
     }
 
     useEffect ( async () => {
@@ -131,9 +137,28 @@ const Reports = () => {
   
       
       ];
-
+      useEffect ( async () => {
+        var config = {
+          method: 'get',
+          url: 'http://localhost:8000/api/section',
+          headers: { 
+            'Authorization': `Bearer ${cookie}`, 
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }};
+          try{
+            let res = await axios(config)
+              if(res.data) {
+            setAllAttendance(res.data)
+            console.log(res.data)
+            }
+          }
+          catch(e){
+            console.log(e);
+          }
+         
+      },[studentId]);
       const Barsz = [
-        { Attendance: 'Present', Students: 23 },
+        { Attendance: 'Present', Students: 30  },
         { Attendance: 'Late', Students: 5 },
         { Attendance: 'Absent', Students: 2 },
    
@@ -172,8 +197,8 @@ const Reports = () => {
                 <Paper style={{backgroundColor: 'rgba(116, 255, 116, 0.145)'}}>
                 <h4 style={Styles.donutTitle}>Section Attendance</h4>
                 <div style={Styles.search}>
-                <BarsSearch/>
-                    <div style={Styles.barSearch}><BarsDate/></div>  
+                <BarsSearch setSection={setSection} />
+                    <div style={Styles.barSearch} setDate={setDate}><BarsDate/></div>  
                     
                 </div>
                 <Chart
@@ -186,7 +211,6 @@ const Reports = () => {
                     valueField="Students"
                     argumentField="Attendance"
                     color="#55A661"
-                  
                 />
                 <Animation />
                  <EventTracker />
