@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function BarsDate() {
+export default function BarsDate(props) {
   const classes = useStyles();
 
   return (
@@ -28,6 +28,7 @@ export default function BarsDate() {
         InputLabelProps={{
           shrink: true,
         }}
+        onChange={(event) => event.target.value ? props.setDate(event.target.value ) : null}
       />
     </form>
   );

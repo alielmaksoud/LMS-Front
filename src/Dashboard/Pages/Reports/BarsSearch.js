@@ -46,7 +46,7 @@ export default function BarsSearch(props) {
     <div>
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="grouped-native-select">Select Section</InputLabel>
-        <Select native defaultValue="" id="grouped-native-select" onChange={(event) => event.target ? props.setSection(event.target ) : null}
+        <Select native defaultValue="" id="grouped-native-select" onChange={(event) => event.target.value ? props.setSection(event.target.value ) : null}
 >
           <option aria-label="None" value="" />
           {Classes.map((option) => { 
@@ -57,7 +57,7 @@ export default function BarsSearch(props) {
                         {option.getsections.map((item)=>{
                             return(
                                 <>
-                                <option label={item.section_name} value={1}></option>
+                                <option label={item.section_name} value={item.id}></option>
                                 </>
                             )
 

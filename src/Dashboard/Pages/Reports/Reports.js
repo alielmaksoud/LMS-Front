@@ -78,14 +78,19 @@ const Reports = () => {
     const setStudent = (student) => {
         setStudentId(student.id);
     }
-    const [allAttendance, setAllAttendance] = useState([]);
+    const [sectionAttendance, setSectionAttendance] = useState([]);
     const [sectionId, setSectionId] = useState(1);
-    const setSection = (section) => {
-        setSectionId(section.id);
-        console.log(section)
+    const [attendanceByDate, setAttendanceByDate] = useState();
+
+    const [attendanceDate, setAttendanceDate] = useState();
+
+    const setSection = (sectionId) => {
+        setSectionId(sectionId);
+        console.log(sectionId)
     }
     const setDate = (date) => {
-        //
+        setAttendanceDate(date)
+        console.log(date)
     }
 
     useEffect ( async () => {
@@ -140,7 +145,7 @@ const Reports = () => {
       useEffect ( async () => {
         var config = {
           method: 'get',
-          url: 'http://localhost:8000/api/section',
+          url: `http://localhost:8000/api/section/${sectionId}`,
           headers: { 
             'Authorization': `Bearer ${cookie}`, 
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -148,15 +153,19 @@ const Reports = () => {
           try{
             let res = await axios(config)
               if(res.data) {
-            setAllAttendance(res.data)
-            console.log(res.data)
+            setSectionAttendance(res.data.getattendance)
             }
           }
           catch(e){
             console.log(e);
           }
          
-      },[studentId]);
+      },[sectionId]);
+
+      useEffect (() =>{
+        setAttendanceByDate(sectionAttendance.filter(item => item.date === attendanceDate))
+        console.log(attendanceByDate)
+      },[])
       const Barsz = [
         { Attendance: 'Present', Students: 30  },
         { Attendance: 'Late', Students: 5 },
@@ -198,7 +207,9 @@ const Reports = () => {
                 <h4 style={Styles.donutTitle}>Section Attendance</h4>
                 <div style={Styles.search}>
                 <BarsSearch setSection={setSection} />
-                    <div style={Styles.barSearch} setDate={setDate}><BarsDate/></div>  
+                <div style={Styles.barSearch} >
+                    <BarsDate setDate={setDate}/>
+                </div>  
                     
                 </div>
                 <Chart
