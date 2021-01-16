@@ -81,7 +81,8 @@ const Reports = () => {
     const [sectionAttendance, setSectionAttendance] = useState([]);
     const [sectionId, setSectionId] = useState(1);
     const [attendanceByDate, setAttendanceByDate] = useState();
-
+    const [display, setdisplay] = useState({display: 'None', color: 'red' });
+    const [message, setmessage] = useState("none");
     const [attendanceDate, setAttendanceDate] = useState();
 
     const setSection = (sectionId) => {
@@ -89,8 +90,15 @@ const Reports = () => {
         console.log(sectionId)
     }
     const setDate = (date) => {
-        setAttendanceDate(date)
-        console.log(date)
+        const filtered = sectionAttendance.filter(item => item.date === date)
+        if (filtered){
+            setAttendanceByDate(filtered)
+        }else {
+            setmessage('No Attendance for the specified date!!!')
+            setdisplay({display: 'inline', color: 'red' })
+        }
+        
+
     }
 
     useEffect ( async () => {
@@ -161,11 +169,7 @@ const Reports = () => {
           }
          
       },[sectionId]);
-
-      useEffect (() =>{
-        setAttendanceByDate(sectionAttendance.filter(item => item.date === attendanceDate))
-        console.log(attendanceByDate)
-      },[])
+    console.log( attendanceByDate, 'hahahhah' )
       const Barsz = [
         { Attendance: 'Present', Students: 30  },
         { Attendance: 'Late', Students: 5 },
@@ -205,6 +209,7 @@ const Reports = () => {
              <div style={Styles.bars}>
                 <Paper style={{backgroundColor: 'rgba(116, 255, 116, 0.145)'}}>
                 <h4 style={Styles.donutTitle}>Section Attendance</h4>
+                {<span style={display}>{message}</span>}
                 <div style={Styles.search}>
                 <BarsSearch setSection={setSection} />
                 <div style={Styles.barSearch} >

@@ -23,7 +23,7 @@ export default function BarsDate(props) {
         id="date"
         label="Birthday"
         type="date"
-        defaultValue="2017-05-24"
+        defaultValue="2021-01-14"
         className={classes.textField}
         InputLabelProps={{
           shrink: true,

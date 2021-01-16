@@ -50,7 +50,6 @@ export default function BarsSearch(props) {
 >
           <option aria-label="None" value="" />
           {Classes.map((option) => { 
-              console.log(option.getsections)
               return (
                 <optgroup label={option.class_name} key={option.id} value={option.id}>
                     
