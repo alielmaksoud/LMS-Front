@@ -1,7 +1,7 @@
 import React from 'react';
 const Styles = {
     container:{
-        padding:'3rem'
+        padding:'0rem 3rem 1rem 3rem'
     },
     totalAttendance:{
         fontFamily:'"Roboto", "Helvetica", "Arial", "sans-serif"',

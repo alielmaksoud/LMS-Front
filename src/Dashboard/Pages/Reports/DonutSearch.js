@@ -44,7 +44,7 @@ export default function DonutSearch(props) {
       groupBy={(option) => option.firstLetter}
       getOptionLabel={(option) => option.first_name + " " + option.last_name}
       style={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label="With categories" variant="outlined" />}
+      renderInput={(params) => <TextField {...params} label="Select a Student" variant="outlined" />}
     />
   );
 }

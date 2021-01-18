@@ -22,25 +22,26 @@ import { Animation, EventTracker, HoverState} from '@devexpress/dx-react-chart';
 
 const Styles = {
     container : {
-        height : '73vh',
+        height : '100%',
         display: 'flex',
         padding : '2%',
         gap : '2%',
         backgroundColor: 'rgba(116, 255, 116, 0.145)'
     },
     donut: {
-        width : "50vw",
-
-    },
-    donutpaper:{
-        backgroundColor: 'rgba(116, 255, 116, 0.145)',
+        width : "50%",
         
+    },
+    paper:{
+        backgroundColor: 'rgba(116, 255, 116, 0.145)',
+        height:'30hv',
+        padding: '20px',
+        position: 'inline'
     },
     donutsearch:{
         display:'flex',
         flexDisplay:'column',
         justifyContent:'center'
-
     },
     donutTitle:{
         marginTop:'0',
@@ -65,10 +66,8 @@ const Styles = {
       fontWeight:'400'
   },
     bars : {
-        width : "50vw",
+        width : "50%",
     }
-    
-
 }
 
 
@@ -83,25 +82,26 @@ const Reports = () => {
     const setStudent = (student) => {
         setStudentId(student.id);
     }
+
     const [sectionAttendance, setSectionAttendance] = useState([]);
-    const [sectionId, setSectionId] = useState(1);
+    const [sectionId, setSectionId] = useState(2);
     const [attendanceByDate, setAttendanceByDate] = useState([]);
     const [display, setdisplay] = useState({display: 'None', color: 'red' });
     const [message, setmessage] = useState("none");
     const [BarPresent, setBarPresent] = useState(5);
     const [BarLate, setBarLate] = useState(3);
     const [BarAbsent, setBarAbsent] = useState(1);
-    const [totalStudents, settotalstudents] = useState(0);
+    const [totalStudents, settotalstudents] = useState(" ");
+    const [studentsMessage, setStudentsMessage] = useState("Please select the section & the date");
 
     const setSection = (sectionId) => {
         setSectionId(sectionId);
     }
-    console.log(sectionId)
     const setDate = (date) => {
         const filtered = sectionAttendance.filter(item => item.date === date)
         if (filtered && filtered.length !== 0){
             setAttendanceByDate(filtered)
-            setdisplay({display: 'none', textAlign:'center', color: 'red' })
+            setdisplay({display: 'none'})
             settotalstudents(filtered.length)
         }else {
             setmessage('No Attendance for the specified date!')
@@ -155,8 +155,6 @@ const Reports = () => {
         { Attendance: 'Present', val: Present },
         { Attendance: 'Late', val: Absent },
         { Attendance: 'Absent', val:Late },
-  
-      
       ];
       useEffect ( async () => {
         var config = {
@@ -175,9 +173,8 @@ const Reports = () => {
           catch(e){
             console.log(e);
           }
-         
+
       },[sectionId]);
-    console.log( attendanceByDate, 'hahahhah' )
     useEffect ( async () => {
       var barPresent =[];
       var barLate =[];
@@ -194,84 +191,83 @@ const Reports = () => {
               barAbsent.push(item);
          }
          }) 
-         if (totalStudents !== 0){
+         if (totalStudents !== 0 && totalStudents !== " "){
           setBarPresent(barPresent.length)
           setBarLate(barLate.length)
           setBarAbsent(barAbsent.length)
+          setStudentsMessage('Number of students: '+ totalStudents)
+          }
+          else if(totalStudents === " "){
+            setStudentsMessage("Please select the Section & date")
           }
           else{
             setBarPresent(0)
             setBarLate(0)
             setBarAbsent(0)
+            setStudentsMessage('')
           }
    },[attendanceByDate, totalStudents]);
-   console.log(BarPresent)
-      const Barsz = [
-        { Attendance: 'Present' + ': ' + BarPresent , Students: BarPresent  },
-        { Attendance: 'Late' + ': ' + BarLate , Students: BarLate},
-        { Attendance: 'Absent' + ': ' + BarAbsent , Students: BarAbsent },
-   
+
+   const Barsz = [
+        { Attendance: 'Present: ' + BarPresent , Students: BarPresent  },
+        { Attendance: 'Late: ' + BarLate , Students: BarLate},
+        { Attendance: 'Absent: ' + BarAbsent , Students: BarAbsent },
       ];
 
 
       
     return (
-        <div style={Styles.container}>
-            <div style={Styles.donut}>
-                <Paper style={Styles.donutpaper}>
-                <h4 style={Styles.donutTitle}>Student Attendance</h4>
-                <div style={Styles.donutsearch}>
-                    <DonutSearch setStudent={setStudent} />
-                </div>
-                <Chart
-                    data={Donut}
-                >
-                    <PieSeries
-                    valueField="val"
-                    argumentField="Attendance"
-                    innerRadius={0.5}
-                    
-                    onClick={(e)=> {
-                        console.log(e.target.attributes.d.value)
-                    }}
-                    />
-                    <Animation />
-                    <EventTracker />
-                     <HoverState />
-                </Chart>
-                <Keys Present={Present} Late={Late} Absent={Absent} totalAttendance={totalAttendance} />
-                </Paper>
+      <div style={Styles.container}>
+        <div style={Styles.donut}>
+          <Paper style={Styles.paper}>
+            <h4 style={Styles.donutTitle}>Student Attendance</h4>
+            <div style={Styles.donutsearch}>
+              <DonutSearch setStudent={setStudent} />
             </div>
-             <div style={Styles.bars}>
-                <Paper style={{backgroundColor: 'rgba(116, 255, 116, 0.145)'}}>
-                <h4 style={Styles.donutTitle}>Section Attendance</h4>
-                {<span style={display}>{message}</span>}
-                <div style={Styles.search}>
-                <BarsSearch setSection={setSection} />
-                <div style={Styles.barSearch} >
-                    <BarsDate setDate={setDate}/>
-                </div>   
-                </div>
-                <h3 style={Styles.totalStudents}> Number of Students: {totalStudents} </h3>                
-                <Chart
-                data={Barsz}
-                >
-                <ArgumentAxis />
-                <ValueAxis max={1} />
-
-                <BarSeries
-                    valueField="Students"
-                    argumentField="Attendance"
-                    color="#55A661"
+            <Chart data={Donut}>
+              <PieSeries
+                valueField="val"
+                argumentField="Attendance"
+                innerRadius={0.4}
+                outerRadius={0.7}
+                onClick={(e)=> {
+                    console.log(e.target.attributes.d.value)
+                }}
                 />
-                <Animation />
-                 <EventTracker />
-                     <HoverState />
-                </Chart>
-            </Paper>
+              <Animation />
+              <EventTracker />
+              <HoverState />
+            </Chart>
+            <Keys Present={Present} Late={Late} Absent={Absent} totalAttendance={totalAttendance} />
+          </Paper>
+        </div>
+        <div style={Styles.bars}>
+          <Paper style={Styles.paper}>
+            <h4 style={Styles.donutTitle}>Section Attendance</h4>
+            {<span style={display}>{message}</span>}
+            <div style={Styles.search}>
+              <BarsSearch setSection={setSection} />
+              <div style={Styles.barSearch} >
+                    <BarsDate setDate={setDate}/>
+              </div>   
             </div>
-         </div>
-      );
+            <h3 style={Styles.totalStudents}>{studentsMessage} </h3>                
+            <Chart data={Barsz}>
+              <ArgumentAxis />
+              <ValueAxis max={1} />
+              <BarSeries
+                valueField="Students"
+                argumentField="Attendance"
+                color="#55A661"
+              />
+              <Animation />
+              <EventTracker />
+              <HoverState />
+            </Chart>
+          </Paper>
+        </div>
+      </div>
+          );
 
 
 }

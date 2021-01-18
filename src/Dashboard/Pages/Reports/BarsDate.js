@@ -21,7 +21,7 @@ export default function BarsDate(props) {
     <form className={classes.container} noValidate>
       <TextField
         id="date"
-        label="Birthday"
+        label="Select Date"
         type="date"
         defaultValue="2021-01-14"
         className={classes.textField}

@@ -13,7 +13,7 @@ import { RestaurantMenu } from "@material-ui/icons";
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
+    minWidth: 200,
   },
 }));
   
@@ -45,9 +45,11 @@ export default function BarsSearch(props) {
   return (
     <div>
       <FormControl className={classes.formControl}>
-        <InputLabel htmlFor="grouped-native-select">Select Section</InputLabel>
-        <Select native defaultValue="" id="grouped-native-select" onChange={(event) => event.target.value ? props.setSection(event.target.value ) : null}
->
+        <InputLabel htmlFor="grouped-native-select">Select a Section</InputLabel>
+        <Select native defaultValue="" id="grouped-native-select" 
+        onChange={(event) => event.target.value ? props.setSection(event.target.value ) : null}
+        >
+
           <option aria-label="None" value="" />
           {Classes.map((option) => { 
               return (
