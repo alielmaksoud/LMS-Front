@@ -21,10 +21,10 @@ function ManageAdmin() {
           color: 'green',
           position: 'fixed',
           zIndex: '0',
-          width: '75%',
+          width: '76%',
           height: '84vh',
           marginTop: '1%',
-          'marginLeft': '15%',
+          marginLeft: '12%'
         },
         backdrop: {
           zIndex: theme.zIndex.drawer + 1,
@@ -108,7 +108,7 @@ function ManageAdmin() {
     }
     const columns = [
 
-      { field: 'student_id', headerName: 'ID', width:120},
+      { field: 'student_id', headerName: 'ID', width:95},
       {
         field: 'image',
         headerName: 'Picture',

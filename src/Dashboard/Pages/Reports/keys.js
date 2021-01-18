@@ -1,26 +1,27 @@
 import React from 'react';
 const Styles = {
     container:{
-        padding:'0rem 3rem 1rem 3rem'
+        padding:'0rem 3rem'
     },
     totalAttendance:{
         fontFamily:'"Roboto", "Helvetica", "Arial", "sans-serif"',
         fontWeight:'400'
     },
     redSquare:{
-        height: '3rem',
-        width: '3rem',
+        height: '1.5rem',
+        width: '1.5rem',
         backgroundColor: '#FE7346'
     },
     greenSquare:{
-        height: '3rem',
-        width: '3rem',
+        height: '1.5rem',
+        width: '1.5rem',
         backgroundColor: '#9CCC65'
     },
     blueSquare:{
-        height: '3rem',
-        width: '3rem',
+        height: '1.5rem',
+        width: '1.5rem',
         backgroundColor: '#54B1EF'
+       
     },
     keys:{
         display:'flex',
@@ -30,6 +31,8 @@ const Styles = {
     key:{
         display:'flex',
         flexDisplay:'column',
+        alignItems:'center',
+        height:'1.5rem'
     },
     attendance:{
         paddingLeft:'1rem'
@@ -37,6 +40,7 @@ const Styles = {
 }
 
 function keys(props) {
+  
     return (
         <div style={Styles.container}>
             <h3 style={Styles.totalAttendance}> {props.totalAttendance}  Learning Days </h3>

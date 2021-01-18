@@ -33,7 +33,7 @@ function ManageAdmin() {
         },
         manageadmins : {
           backgroundColor: "rgba(116, 255, 116, 0.145)",
-          height: '84vh'
+          height : '86vh',
         }
       }));
     const adminsTable = useStyles();

@@ -23,7 +23,7 @@ function ManageAdmin() {
         adminsTable: {
           color: 'green',
           zIndex: '0',
-          width: '50%',
+          width: '55%',
           height: '65vh',
           marginTop: '1%',
           'marginLeft': '25%',
@@ -31,7 +31,7 @@ function ManageAdmin() {
         },
         manageclass : {
           backgroundColor: "rgba(116, 255, 116, 0.145)",
-          height:'84vh',
+          height:'86vh',
           textAlign: 'center'
 
         },

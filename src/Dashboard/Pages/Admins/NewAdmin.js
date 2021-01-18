@@ -20,7 +20,6 @@ const useStyless = makeStyles((themee) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-
   },
 
   formm: {
@@ -46,7 +45,7 @@ const useStyless = makeStyles((themee) => ({
   },
   editclass : {
     backgroundColor: "rgba(116, 255, 116, 0.145)",
-    height: '83vh'
+    height : '86vh'
   }
  
 }));

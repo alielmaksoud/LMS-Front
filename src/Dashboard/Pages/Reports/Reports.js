@@ -22,21 +22,21 @@ import { Animation, EventTracker, HoverState} from '@devexpress/dx-react-chart';
 
 const Styles = {
     container : {
-        height : '100%',
+        height : '78vh',
         display: 'flex',
         padding : '2%',
         gap : '2%',
-        backgroundColor: 'rgba(116, 255, 116, 0.145)'
+        backgroundColor: 'rgba(116, 255, 116, 0.145)',
+        overflowY:'scroll'
     },
     donut: {
-        width : "50%",
-        
+        width : "50%",        
     },
     paper:{
         backgroundColor: 'rgba(116, 255, 116, 0.145)',
-        height:'30hv',
         padding: '20px',
-        position: 'inline'
+        position: 'static',
+        height : '99vh',
     },
     donutsearch:{
         display:'flex',
@@ -82,6 +82,13 @@ const Reports = () => {
     const setStudent = (student) => {
         setStudentId(student.id);
     }
+//  const [StudentMessage, setStudentMessage] = useState("none");
+//  const [StudentDisplay, setStudentDisplay] = useState({display: 'None', color: 'red' });
+//     if (totalAttendance === 0){
+//         setStudentMessage('No Attendance for the specified Student!')
+//         setStudentDisplay({display: 'inline-block', textAlign:'center', width:'100%', color: 'red' })
+//     }
+//     console.log(StudentMessage)
 
     const [sectionAttendance, setSectionAttendance] = useState([]);
     const [sectionId, setSectionId] = useState(2);
@@ -92,7 +99,8 @@ const Reports = () => {
     const [BarLate, setBarLate] = useState(3);
     const [BarAbsent, setBarAbsent] = useState(1);
     const [totalStudents, settotalstudents] = useState(" ");
-    const [studentsMessage, setStudentsMessage] = useState("Please select the section & the date");
+    const [sectionMessage, setSectionMessage] = useState("Please select the section & the date");
+   
 
     const setSection = (sectionId) => {
         setSectionId(sectionId);
@@ -128,12 +136,13 @@ const Reports = () => {
           catch(e){
             console.log(e);
           }  
+          
       },[studentId]);
       useEffect ( async () => {
          var Present =[];
          var Late =[];
          var Absent =[];
-
+         try{
             singleAttendance.forEach((item) =>{
                
                 if(item.status === 'present'){
@@ -148,6 +157,10 @@ const Reports = () => {
             setPresent(Present.length)
             setLate(Late.length)
             setAbsent(Absent.length)
+          }
+          catch(e){
+            console.log(e)
+          }
       },[singleAttendance]);
       
 
@@ -195,16 +208,16 @@ const Reports = () => {
           setBarPresent(barPresent.length)
           setBarLate(barLate.length)
           setBarAbsent(barAbsent.length)
-          setStudentsMessage('Number of students: '+ totalStudents)
+          setSectionMessage('Number of students: '+ totalStudents)
           }
           else if(totalStudents === " "){
-            setStudentsMessage("Please select the Section & date")
+            setSectionMessage("Please select the Section & date")
           }
           else{
             setBarPresent(0)
             setBarLate(0)
             setBarAbsent(0)
-            setStudentsMessage('')
+            setSectionMessage('')
           }
    },[attendanceByDate, totalStudents]);
 
@@ -224,12 +237,14 @@ const Reports = () => {
             <div style={Styles.donutsearch}>
               <DonutSearch setStudent={setStudent} />
             </div>
+            {/* {<span style={display}>{StudentMessage}</span>} */}
+            <Keys Present={Present} Late={Late} Absent={Absent} totalAttendance={totalAttendance} />
             <Chart data={Donut}>
               <PieSeries
                 valueField="val"
                 argumentField="Attendance"
-                innerRadius={0.4}
-                outerRadius={0.7}
+                innerRadius={0.5}
+                outerRadius={0.9}
                 onClick={(e)=> {
                     console.log(e.target.attributes.d.value)
                 }}
@@ -238,7 +253,6 @@ const Reports = () => {
               <EventTracker />
               <HoverState />
             </Chart>
-            <Keys Present={Present} Late={Late} Absent={Absent} totalAttendance={totalAttendance} />
           </Paper>
         </div>
         <div style={Styles.bars}>
@@ -251,14 +265,15 @@ const Reports = () => {
                     <BarsDate setDate={setDate}/>
               </div>   
             </div>
-            <h3 style={Styles.totalStudents}>{studentsMessage} </h3>                
+            <h3 style={Styles.totalStudents}>{sectionMessage} </h3>                
             <Chart data={Barsz}>
               <ArgumentAxis />
               <ValueAxis max={1} />
               <BarSeries
                 valueField="Students"
                 argumentField="Attendance"
-                color="#55A661"
+                color="#9CCC65"
+                // style={{fontSize:'20px'}}
               />
               <Animation />
               <EventTracker />

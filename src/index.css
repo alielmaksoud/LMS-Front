@@ -5,7 +5,7 @@ body {
     sans-serif ;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale ;
-  height: 100%;
+  height: 100vh;
 
 }
 
@@ -83,7 +83,7 @@ div.MuiButtonBase-root > a {
 }
 
 .nav-menu.active {
-  height: 84.9vh;
+  height: 86vh;
   left: 0;
   transition: 350ms;
   position: absolute;
