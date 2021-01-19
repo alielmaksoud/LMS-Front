@@ -34,7 +34,15 @@ const Styles = {
     position: "static",
     height: "99vh",
   },
-
+  donutTitle:{
+    marginTop:'0',
+    paddingTop:'2%',
+    textAlign:'center',
+    fontSize:'1.5rem',
+    fontWeight:'400',
+    fontFamily:'"Roboto", "Helvetica", "Arial", "sans-serif"',
+    marginBottom:'1rem',
+},
   search: {
     display: "flex",
     flexDisplay: "column",
@@ -56,7 +64,7 @@ const Styles = {
 const Bars = () => {
   const cookie = CookieService.get("Bearer");
   const [sectionAttendance, setSectionAttendance] = useState([]);
-  const [sectionId, setSectionId] = useState();
+  const [sectionId, setSectionId] = useState(1);
   const [attendanceByDate, setAttendanceByDate] = useState([]);
   const [display, setdisplay] = useState({ display: "None", color: "red" });
   const [message, setmessage] = useState("none");
@@ -107,11 +115,11 @@ const Bars = () => {
     var barAbsent = [];
     if (sectionAttendance.length > 0) {
       sectionAttendance.forEach((item) => {
-        if (item.status === "Present") {
+        if (item.status === "present") {
           barPresent.push(item);
-        } else if (item.status === "Late") {
+        } else if (item.status === "late") {
           barLate.push(item);
-        } else if (item.status === "Absent") {
+        } else if (item.status === "absent") {
           barAbsent.push(item);
         }
       });
@@ -119,10 +127,13 @@ const Bars = () => {
       setBarLate(barLate.length);
       setBarAbsent(barAbsent.length);
       setSectionMessage("Number of students: " + sectionAttendance.length);
+      setdisplay({
+        display: "none"
+      });
     } else {
-      setBarPresent(5);
-      setBarLate(5);
-      setBarAbsent(5);
+      setBarPresent(0);
+      setBarLate(0);
+      setBarAbsent(0);
       setSectionMessage("Number of students: " + sectionAttendance.length);
       setmessage("No Attendance for the specified date!");
       setdisplay({

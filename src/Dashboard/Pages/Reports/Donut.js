@@ -106,12 +106,12 @@ const Donut = () => {
          try{
             singleAttendance.forEach((item) =>{
                
-                if(item.status === 'Present'){
+                if(item.status === 'present'){
                   Present.push(item);
                     
-                }else if(item.status === 'Late'){
+                }else if(item.status === 'late'){
                   Late.push(item);
-               }else if(item.status === 'Absent'){
+               }else if(item.status === 'absent'){
                 Absent.push(item);
             }
             }) 
