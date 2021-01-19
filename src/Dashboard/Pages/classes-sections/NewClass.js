@@ -33,6 +33,7 @@ const useStylesss = makeStyles((themee) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    
   },
 
   formm: {
@@ -132,7 +133,7 @@ function NewClass() {
  }
  else {
   return (
-    <div className={NewAdminclass.editclass} >
+    <div className={NewAdminclass.editclass}>
     <Container component="main" maxWidth="md">
       <div className={NewAdminclass.paperr}>
         <Typography component="h1" variant="h5">

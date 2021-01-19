@@ -35,7 +35,6 @@ export default function BarsSearch(props) {
             axios(config)
             .then(res => {
                 setClasses(res.data.sections)                
-                console.log(Classes)
             }).catch(err => {
               console.log(err.request)
             })
