@@ -4,6 +4,7 @@ import DonutSearch from './DonutSearch';
 import BarsSearch from './BarsSearch'
 import BarsDate from './BarsDate'
 import CookieService from '../../Service/CookieService';
+import './Reports.css';
 import axios from 'axios'
 import Keys from './keys'
 
@@ -145,12 +146,12 @@ const Reports = () => {
          try{
             singleAttendance.forEach((item) =>{
                
-                if(item.status === 'present'){
+                if(item.status === 'Present'){
                   Present.push(item);
                     
-                }else if(item.status === 'late'){
+                }else if(item.status === 'Late'){
                   Late.push(item);
-               }else if(item.status === 'absent'){
+               }else if(item.status === 'Absent'){
                 Absent.push(item);
             }
             }) 
@@ -195,12 +196,12 @@ const Reports = () => {
 
       attendanceByDate.forEach((item) =>{
             
-             if(item.status === 'present'){
+             if(item.status === 'Present'){
               barPresent.push(item);
                  
-             }else if(item.status === 'late'){
+             }else if(item.status === 'Late'){
               barLate.push(item);
-            }else if(item.status === 'absent'){
+            }else if(item.status === 'Absent'){
               barAbsent.push(item);
          }
          }) 
@@ -230,9 +231,9 @@ const Reports = () => {
 
       
     return (
-      <div style={Styles.container}>
+      <div  className="reportscon">
         <div style={Styles.donut}>
-          <Paper style={Styles.paper}>
+        <Paper className='reportspaper'>
             <h4 style={Styles.donutTitle}>Student Attendance</h4>
             <div style={Styles.donutsearch}>
               <DonutSearch setStudent={setStudent} />
@@ -256,7 +257,7 @@ const Reports = () => {
           </Paper>
         </div>
         <div style={Styles.bars}>
-          <Paper style={Styles.paper}>
+          <Paper className='reportspaper'>
             <h4 style={Styles.donutTitle}>Section Attendance</h4>
             {<span style={display}>{message}</span>}
             <div style={Styles.search}>

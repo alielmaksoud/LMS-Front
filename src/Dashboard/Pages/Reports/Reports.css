@@ -1,0 +1,37 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+html {
+  background-color: rgba(116, 255, 116, 0.145);
+}
+
+.reportscon {
+  display: flex !important;
+  height: 82.5vh !important;
+  padding: 0%;
+  margin: 0%;
+  overflow-y: scroll !important;
+  background-color: rgba(116, 255, 116, 0.145) !important;
+  font-weight: 400 !important;
+  font-family: "Roboto", "Helvetica", "Arial", "sans-serif" !important ;
+  margin-bottom: 1rem !important;
+}
+
+.reportspaper {
+  background-color: rgba(116, 255, 116, 0.145) !important;
+  padding: 20px !important;
+  position: static !important;
+  height: 116vh !important;
+  margin: 20px !important;
+}

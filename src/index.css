@@ -1,22 +1,19 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif ;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale ;
-  height: 100vh;
-
+  margin: 0 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif !important ;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace !important;
 }
 
 html {
-  background-color: rgba(116, 255, 116, 0.145);
-
+  background-color: rgba(116, 255, 116, 0.145) !important;
 }
 
 /* /* .sidebar {
@@ -46,16 +43,14 @@ div.MuiButtonBase-root > a {
   padding-top: 10px;
 }
 
-
 .navbarr {
-  background-color: #55A661;
+  background-color: #55a661;
   height: 95px;
   display: flex;
   align-items: center;
-  -moz-box-shadow:    1px 0 8px 0 rebeccapurple;
+  -moz-box-shadow: 1px 0 8px 0 rebeccapurple;
   -webkit-box-shadow: 1px 0 8px 0 rebeccapurple;
-  box-shadow:         1px 0 8px 0 rebeccapurple;
-
+  box-shadow: 1px 0 8px 0 rebeccapurple;
 }
 
 .menu-bars {
@@ -66,7 +61,7 @@ div.MuiButtonBase-root > a {
 }
 
 .nav-menu {
-  background-color: #48594B;
+  background-color: #48594b;
   width: 250px;
   position: absolute;
   z-index: 10;
@@ -74,16 +69,15 @@ div.MuiButtonBase-root > a {
   left: -100%;
   transition: 850ms;
   color: #bffac8;
-  -moz-box-shadow:    1px 0 8px 0 #55A661;
-  -webkit-box-shadow: 1px 0 8px 0 #55A661;
-  box-shadow:         1px 0 8px 0 #55A661;
+  -moz-box-shadow: 1px 0 8px 0 #55a661;
+  -webkit-box-shadow: 1px 0 8px 0 #55a661;
+  box-shadow: 1px 0 8px 0 #55a661;
   height: 80vh;
   overflow-y: scroll;
-
 }
 
 .nav-menu.active {
-  height: 86vh;
+  height: 85vh;
   left: 0;
   transition: 350ms;
   position: absolute;
@@ -91,7 +85,6 @@ div.MuiButtonBase-root > a {
   scrollbar-color: rebeccapurple green;
   scrollbar-width: thin;
   z-index: 10;
- 
 }
 
 /* these webkits are for stying scroller in chrome */
@@ -100,13 +93,13 @@ div.MuiButtonBase-root > a {
 }
 
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 5px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 /******************/
 
@@ -114,32 +107,26 @@ div.MuiButtonBase-root > a {
   padding: 2%;
   text-align: center;
   width: 100%;
-
 }
 
 .logo {
   width: 60px;
   align-self: flex-end;
-
-  
 }
 .head-title > h4:nth-child(2) {
   font-size: 1.1rem;
-  font-family: 'Dancing Script', cursive;
+  font-family: "Dancing Script", cursive;
   margin-top: 0;
   margin-bottom: 2px;
-
 }
 
-.logoutbutton{
-
+.logoutbutton {
   font-size: 0.9rem;
-  font-family: 'Roboto' !important;
+  font-family: "Roboto" !important;
   color: whitesmoke !important;
   border-radius: 25px !important;
   margin-right: 20px !important;
   cursor: pointer;
-
 }
 
 .Link {
@@ -150,6 +137,23 @@ div.MuiButtonBase-root > a {
 .loginmain {
   background-color: rgba(116, 255, 116, 0.145);
   width: 100%;
-  height: 80vh
-  
+  height: 80vh;
+}
+
+.reportscon {
+  display: flex !important;
+  height: 88vh !important;
+  overflow-y: scroll !important ;
+  background-color: rgba(116, 255, 116, 0.145) !important;
+  font-weight: 400 !important;
+  font-family: "Roboto", "Helvetica", "Arial", "sans-serif" !important ;
+  margin-bottom: 1rem !important;
+}
+
+.reportspaper {
+  background-color: rgba(116, 255, 116, 0.145) !important;
+  padding: 20px !important;
+  position: static !important;
+  height: 115vh !important;
+  margin: 20px !important;
 }
