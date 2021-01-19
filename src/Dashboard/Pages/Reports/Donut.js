@@ -141,7 +141,7 @@ const Donut = () => {
               <DonutSearch setStudent={setStudent} />
             </div>
             <Keys Present={Present} Late={Late} Absent={Absent} totalAttendance={totalAttendance} />
-            <Chart data={Donut}>
+            <Chart height={350} data={Donut}>
               <PieSeries
                 valueField="val"
                 argumentField="Attendance"

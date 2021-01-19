@@ -58,6 +58,7 @@ const Styles = {
   },
   bars: {
     width: "50%",
+    
   },
 };
 
@@ -165,13 +166,14 @@ const Bars = () => {
           </div>
         </div>
         <h3 style={Styles.totalStudents}>{sectionMessage} </h3>
-        <Chart data={Barsz}>
+        <Chart height={350} data={Barsz}>
           <ArgumentAxis />
           <ValueAxis max={1} />
           <BarSeries
             valueField="Students"
             argumentField="Attendance"
             color="#9CCC65"
+            
           />
           <Animation />
           <EventTracker />
