@@ -99,6 +99,7 @@ const Bars = () => {
     axios(config)
       .then((res) => {
         if (res.data.getattendance != undefined) {
+         
           let dataa = res.data.getattendance.filter(
             (item) => item.date == datee
           );
